@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>THE COSMIC MIRROR</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family:'Cinzel', serif;
+}
+
+/* ===== OVERLAY ===== */
+#overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  padding-top:15vh;
+  z-index:5;
+  transition:1.2s;
+}
+
+/* ===== TITLE ===== */
+.title{
+  font-size:70px;
+  letter-spacing:10px;
+  color:white;
+  text-align:center;
+  text-shadow:
+    0 0 15px #00ffff,
+    0 0 50px #00aaff;
+}
+
+/* ===== BUTTON ===== */
+.mystic-btn-wrapper{
+  margin-top:58vh;
+}
+
+.enter-btn{
+  position:relative;
+  overflow:hidden;
+  padding:18px 80px;
+  font-size:20px;
+  border-radius:60px;
+  border:1px solid rgba(0,255,255,0.4);
+  cursor:pointer;
+  background:rgba(0,0,40,0.75);
+  backdrop-filter:blur(12px);
+  color:#00eaff;
+  letter-spacing:2px;
+  transition:0.4s ease;
+  box-shadow:
+    0 0 30px rgba(0,255,255,0.6),
+    inset 0 0 20px rgba(0,255,255,0.2);
+}
+
+.enter-btn:hover{
+  transform:scale(1.06);
+  box-shadow:
+    0 0 50px cyan,
+    0 0 100px rgba(0,255,255,0.5);
+  color:white;
+}
+
+/* Light sweep */
+.enter-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-150%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.9),
+    transparent
+  );
+  transform:skewX(-25deg);
+}
+
+.enter-btn:hover::before{
+  animation:sweep 1.2s forwards;
+}
+
+@keyframes sweep{
+  0%{ left:-150%; }
+  100%{ left:150%; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="overlay">
+  <div class="title">THE COSMIC MIRROR</div>
+  <div class="mystic-btn-wrapper">
+    <button class="enter-btn" onclick="enterPortal()">
+      Nhà ngươi sẵn sàng đi tìm vận mệnh chứ?
+    </button>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 6000);
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+/* ================= STARFIELD ================= */
+const starCount = 8000;
+const starsGeometry = new THREE.BufferGeometry();
+const starPositions = new Float32Array(starCount * 3);
+
+for(let i=0;i<starCount;i++){
+  const radius = 1500 + Math.random()*2500;
+  const theta = Math.random() * 2 * Math.PI;
+  const phi = Math.acos((Math.random()*2)-1);
+
+  starPositions[i*3]     = radius*Math.sin(phi)*Math.cos(theta);
+  starPositions[i*3 + 1] = radius*Math.sin(phi)*Math.sin(theta);
+  starPositions[i*3 + 2] = radius*Math.cos(phi);
+}
+
+starsGeometry.setAttribute('position',
+  new THREE.BufferAttribute(starPositions,3)
+);
+
+const starsMaterial = new THREE.PointsMaterial({
+  color:0xffffff,
+  size:0.4,
+  sizeAttenuation:true
+});
+
+const starField = new THREE.Points(starsGeometry, starsMaterial);
+scene.add(starField);
+
+/* ================= EARTH ================= */
+const loader = new THREE.TextureLoader();
+
+const earthTexture = loader.load("https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg");
+const earthNormal = loader.load("https://threejs.org/examples/textures/planets/earth_normal_2048.jpg");
+const earthSpec = loader.load("https://threejs.org/examples/textures/planets/earth_specular_2048.jpg");
+const cloudTexture = loader.load("https://threejs.org/examples/textures/planets/earth_clouds_1024.png");
+
+const earthGeo = new THREE.SphereGeometry(2.2,64,64);
+
+const earthMat = new THREE.MeshPhongMaterial({
+  map:earthTexture,
+  normalMap:earthNormal,
+  specularMap:earthSpec,
+  specular:new THREE.Color(0x555555),
+  shininess:15
+});
+
+const earth = new THREE.Mesh(earthGeo,earthMat);
+scene.add(earth);
+
+/* ===== CLOUD LAYER ===== */
+const cloudGeo = new THREE.SphereGeometry(2.23,64,64);
+const cloudMat = new THREE.MeshPhongMaterial({
+  map:cloudTexture,
+  transparent:true,
+  opacity:0.8,
+  depthWrite:false
+});
+const clouds = new THREE.Mesh(cloudGeo,cloudMat);
+scene.add(clouds);
+
+
+
+/* ================= LIGHT ================= */
+const sunLight = new THREE.DirectionalLight(0xffffff,1.8);
+sunLight.position.set(5,3,5);
+scene.add(sunLight);
+
+scene.add(new THREE.AmbientLight(0x404040));
+
+camera.position.z = 8;
+
+let entering=false;
+let warpSpeed=0;
+let warpAcceleration=0.12;
+let totalWarpTime=0;
+
+/* ================= ANIMATION ================= */
+function animate(){
+  requestAnimationFrame(animate);
+
+  earth.rotation.y += 0.002;
+  clouds.rotation.y += 0.0025;
+  starField.rotation.y += 0.00012;
+
+  if(entering){
+    totalWarpTime++;
+
+    warpSpeed += warpAcceleration;
+    warpAcceleration *= 1.01;
+
+    const positions = starsGeometry.attributes.position.array;
+
+    for(let i=0;i<starCount;i++){
+      positions[i*3+2] += warpSpeed;
+      if(positions[i*3+2] > 5000){
+        positions[i*3+2] = -5000;
+      }
+    }
+
+    starsGeometry.attributes.position.needsUpdate = true;
+    camera.position.z -= 0.015 + warpSpeed*0.0015;
+
+    if(totalWarpTime > 240){ // ~7 giây
+      document.body.style.transition="1.2s";
+      document.body.style.background="white";
+
+      setTimeout(()=>{
+        sessionStorage.setItem("fromIntro","true");
+        window.location.href = "app.html";
+      },1200);
+    }
+
+  }else{
+    camera.lookAt(0,0,0);
+  }
+
+  renderer.render(scene,camera);
+}
+animate();
+
+/* ================= ENTER ================= */
+window.enterPortal=function(){
+  entering=true;
+  document.getElementById("overlay").style.opacity="0";
+};
+
+window.addEventListener("resize",()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+});
+</script>
+
+</body>
+</html>

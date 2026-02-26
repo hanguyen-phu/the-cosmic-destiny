@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Cosmic Destiny</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=EB+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+  <body>
+<script>
+if (performance.navigation.type === 1) {
+  window.location.href = "/";
+}
+</script>
+
+  
+<canvas id="stars"></canvas>
+
+<header class="mystic-header">
+  <h1 class="logo">CELESTIAL CODE</h1>
+  <h2 class="slogan">
+    How many springs are left in your soul?
+  </h2>
+
+  <div class="zodiac-layer">
+    <span>🐀</span>
+    <span>🐂</span>
+    <span>🐅</span>
+    <span>🐇</span>
+    <span>🐉</span>
+    <span>🐍</span>
+    <span>🐎</span>
+    <span>🐐</span>
+    <span>🐒</span>
+    <span>🐓</span>
+    <span>🐕</span>
+    <span>🐖</span>
+  </div>
+</header>
+
+<section class="cosmic-body">
+
+  <div class="input-group">
+    <div class="input-box">
+      <label>Họ và tên</label>
+      <input type="text" id="name" placeholder="Nhập họ tên của bạn">
+    </div>
+
+    <div class="input-box">
+      <label>Ngày sinh</label>
+      <input type="date" id="dob">
+    </div>
+  </div>
+
+  <div class="feature-grid">
+    
+    <!-- ĐOÁN TUỔI THỌ -->
+    <div class="feature-card" onclick="activateCard(this, predictLife, event)">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2v20M2 12h20"/>
+      </svg>
+      <h3>Đoán Tuổi Thọ</h3>
+      <p>Khám phá số năm còn lại của bạn</p>
+    </div>
+
+    <!-- CUNG HOÀNG ĐẠO -->
+    <div class="feature-card" onclick="activateCard(this, zodiacReveal, event)">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8"/>
+      </svg>
+      <h3>Cung Hoàng Đạo</h3>
+      <p>Giải mã bản chất thiên mệnh của bạn</p>
+    </div>
+
+    <!-- MỆNH KHÍ -->
+    <div class="feature-card" onclick="activateCard(this, energyFlow, event)">
+      <svg viewBox="0 0 24 24">
+        <path d="M13 2L3 14h7l-1 8 10-12h-7z"/>
+      </svg>
+      <h3>Mệnh Khí</h3>
+      <p>Chỉ số năng lượng và vận khí cá nhân</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     PAGE OVERLAY - LIFE PAGE (COSMIC HOURGLASS)
+========================= -->
+
+<div class="page-overlay" id="lifePage">
+  <div class="page-content" id="lifePageContent">
+
+    <button class="back-btn" onclick="closePage()">← Trở về</button>
+
+    <h2 class="page-title">🔮 Đoán Tuổi Thọ</h2>
+
+    <!-- LIFESTYLE QUIZ PANEL -->
+    <div id="lifestylePanel" class="lifestyle-panel">
+      <div class="lifestyle-intro">
+        <p class="lifestyle-sub">Ta cần biết thêm thông tin của ngươi để tính toán thiên mệnh</p>
+      </div>
+      <div class="lifestyle-questions" id="lifestyleQuestions">
+
+        <div class="lq-item">
+          <div class="lq-label">🌙 Thói quen ngủ</div>
+          <div class="lq-options">
+            <button class="lq-btn" data-key="sleep" data-val="2" onclick="selectLQ(this)">Ngủ đủ 8 tiếng</button>
+            <button class="lq-btn" data-key="sleep" data-val="0" onclick="selectLQ(this)">5-6 tiếng</button>
+            <button class="lq-btn" data-key="sleep" data-val="-3" onclick="selectLQ(this)">Cú đêm</button>
+          </div>
+        </div>
+
+        <div class="lq-item">
+          <div class="lq-label">🏃 Vận động</div>
+          <div class="lq-options">
+            <button class="lq-btn" data-key="exercise" data-val="4" onclick="selectLQ(this)">Tập thể dục đều</button>
+            <button class="lq-btn" data-key="exercise" data-val="1" onclick="selectLQ(this)">Thỉnh thoảng</button>
+            <button class="lq-btn" data-key="exercise" data-val="-2" onclick="selectLQ(this)">Không tập</button>
+          </div>
+        </div>
+
+        <div class="lq-item">
+          <div class="lq-label">🥗 Chế độ ăn</div>
+          <div class="lq-options">
+            <button class="lq-btn" data-key="diet" data-val="3" onclick="selectLQ(this)">Ăn uống lành mạnh</button>
+            <button class="lq-btn" data-key="diet" data-val="0" onclick="selectLQ(this)">Bình thường</button>
+            <button class="lq-btn" data-key="diet" data-val="-3" onclick="selectLQ(this)">Ăn uống tùy hứng</button>
+          </div>
+        </div>
+
+        <div class="lq-item">
+          <div class="lq-label">😰 Mức độ stress</div>
+          <div class="lq-options">
+            <button class="lq-btn" data-key="stress" data-val="2" onclick="selectLQ(this)">Tâm thái bình an</button>
+            <button class="lq-btn" data-key="stress" data-val="-2" onclick="selectLQ(this)">Đôi lúc lo âu</button>
+            <button class="lq-btn" data-key="stress" data-val="-5" onclick="selectLQ(this)">Áp lực cao</button>
+          </div>
+        </div>
+
+        <div class="lq-item">
+          <div class="lq-label">🚬 Thói quen xấu</div>
+          <div class="lq-options">
+            <button class="lq-btn" data-key="vice" data-val="2" onclick="selectLQ(this)">Không có</button>
+            <button class="lq-btn" data-key="vice" data-val="-4" onclick="selectLQ(this)">Uống nhiều Cafe, nước ngọt</button>
+            <button class="lq-btn" data-key="vice" data-val="-7" onclick="selectLQ(this)">Hút thuốc, uống rượu bia</button>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="cosmic-predict-btn" id="cosmicPredictBtn" onclick="startCosmicHourglass()" disabled>
+        <span class="cpb-inner">🔮 Tiên Đoán Thiên Mệnh</span>
+      </button>
+    </div>
+
+    <!-- COSMIC HOURGLASS ARENA -->
+    <div id="cosmicArena" class="cosmic-arena" style="display:none">
+
+      <!-- Warp speed background -->
+      <canvas id="warpCanvas" class="warp-canvas" style="opacity:0"></canvas>
+
+      <!-- TWO-COLUMN RESULT LAYOUT -->
+      <div class="arena-columns" id="arenaColumns" style="display:none; opacity:0">
+
+        <!-- LEFT: result text -->
+        <div class="arena-left" id="arenaLeft">
+
+          <div class="al-lived-row">
+            <div class="al-stat">
+              <div class="al-stat-label">⏳ ĐÃ SỐNG</div>
+              <div class="al-stat-num lived" id="hgLivedNum" style="color: #ffa500;font-weight: 700;text-shadow:0 0 12px rgba(255,165,0,0.9),0 0 30px rgba(255,120,0,0.6);">—</div>
+              <div class="al-stat-unit" style="font-size: 14px;letter-spacing: 2px;font-weight: 600;opacity: 1;color: #ffcc66;text-shadow: 0 0 6px rgba(255,200,100,0.7);">năm</div>
+            </div>
+            <div class="al-stat">
+              <div class="al-stat-label">✨ CÒN LẠI</div>
+              <div class="al-stat-num remain" id="hgRemainNum" style="color: #00ffc8;font-weight: 700;text-shadow:0 0 12px rgba(0,255,200,0.9),0 0 30px rgba(0,200,255,0.6);">—</div>
+              <div class="al-stat-unit" style="font-size: 14px;letter-spacing: 2px;font-weight: 600;opacity: 1;color: #8afff0;text-shadow: 0 0 6px rgba(0,255,220,0.7);">năm</div>
+            </div>
+          </div>
+
+          <!-- Revelation — shown after hold -->
+          <div class="al-revelation" id="hgRevelation" style="opacity:0; transform:translateY(20px)">
+            <div class="al-rev-number" id="hgRevNumber" style="margin-bottom: 25px ;"></div>
+            <div class="al-rev-sub" id="hgRevSub"></div>
+          </div>
+
+          <!-- Symbol -->
+          <div class="al-symbol" id="hgBottomSymbol" style="opacity:0"></div>
+
+          <!-- Bonus / dark matter + stats -->
+          <div id="arenaResultExtra"></div>
+
+        </div>
+
+        <!-- RIGHT: pure-CSS hourglass + stardust canvas -->
+        <div class="arena-right" id="arenaRight">
+
+          <div class="hg-wrapper" id="hgWrapper">
+
+            <!-- Magic ring top -->
+            <div class="magic-ring ring-top" id="ringTop"></div>
+
+            <!-- Top bulb -->
+            <div class="hg-top" id="hgTop">
+              <div class="hg-glass-top">
+                <div class="sand-top" id="sandTop"></div>
+              </div>
+            </div>
+
+            <!-- Neck / singularity -->
+            <div class="hg-neck" id="hgNeck">
+              <div class="singularity"></div>
+              <div class="neck-flow"></div>
+            </div>
+
+            <!-- Bottom bulb -->
+            <div class="hg-bottom" id="hgBottom">
+              <div class="hg-glass-bottom">
+                <div class="sand-bottom" id="sandBottom"></div>
+              </div>
+            </div>
+
+            <!-- Magic ring bottom -->
+            <div class="magic-ring ring-bottom" id="ringBottom"></div>
+
+            <!-- Stardust canvas overlay -->
+            <canvas id="stardustCanvas" class="stardust-canvas"></canvas>
+
+            <!-- Neck touch zone -->
+            <div class="hg-neck-touch" id="hgNeckTouch">
+              <div class="hg-neck-pulse"></div>
+              <div class="hg-neck-hint">Chạm &amp; Giữ</div>
+              <!-- Hold progress ring drawn via SVG -->
+              <svg class="hold-svg" id="holdSvg" viewBox="0 0 80 80">
+                <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,255,200,0.15)" stroke-width="3"/>
+                <circle id="holdArc" cx="40" cy="40" r="34" fill="none"
+                        stroke="rgba(0,255,200,0.9)" stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-dasharray="213.6"
+                        stroke-dashoffset="213.6"
+                        transform="rotate(-90 40 40)"/>
+              </svg>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- legacy anchors for JS compat -->
+    <div id="lifeNumber" style="display:none"></div>
+
+  </div>
+</div>
+
+<!-- =========================
+     PAGE OVERLAY - ZODIAC PAGE
+========================= -->
+
+<!-- =========================
+     PAGE OVERLAY - ZODIAC PAGE
+========================= -->
+
+<div class="page-overlay" id="zodiacPage">
+
+  <!-- Background linh vật -->
+  <div class="zodiac-bg" id="zodiacBg"></div>
+<div class="zodiac-spirit" id="zodiacSpirit"></div>
+  <!-- Canvas vẽ chòm sao -->
+  <canvas id="zodiacCanvas"></canvas>
+
+  <div class="page-content">
+
+    <button class="back-btn" onclick="closeZodiac()">← Trở về</button>
+
+    <h2 class="page-title">✨ Cung Hoàng Đạo</h2>
+
+    <div class="zodiac-header">
+  <div class="zodiac-result" id="zodiacResult"></div>
+  <img id="zodiacImage" class="zodiac-image" src="" alt="">
+</div>
+
+    <div class="zodiac-description" id="zodiacDescription"></div>
+
+  </div>
+</div>
+
+<div class="page-overlay" id="energyPage">
+
+  <div class="page-content">
+
+    <button class="back-btn" onclick="closeEnergy()">← Trở về</button>
+    <h2 class="page-title">⚡ Mệnh Khí</h2>
+
+    <div class="energy-layout">
+
+      <!-- BÊN TRÁI: chỉ lá tarot -->
+      <div class="energy-left">
+        <!-- Hidden holders for JS compatibility -->
+        <div id="energyResult" style="display:none"></div>
+        <div id="energyProphecy" style="display:none"></div>
+
+        <!-- Lá bài tarot chi tiết -->
+        <div class="energy-card energy-card-bottom" id="energyCard2">
+          <div id="energyRelations"></div>
+        </div>
+      </div>
+
+      <!-- VÒNG PHẢI -->
+<div class="energy-right">
+
+  <svg viewBox="0 0 600 600" class="five-svg" id="fiveSVG">
+    <defs>
+      <filter id="glow-active" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow-user" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow-sinh" x="-20%" y="-20%" width="140%" height="140%">
+        <feColorMatrix type="matrix" values="0 0 0 0 0  1 0 0 0 0.8  0 0 0 0 0.5  0 0 0 0.6 0" result="green"/>
+        <feGaussianBlur in="green" stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow-khac" x="-20%" y="-20%" width="140%" height="140%">
+        <feColorMatrix type="matrix" values="1 0 0 0 0.8  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" result="red"/>
+        <feGaussianBlur in="red" stdDeviation="4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <!-- Vòng nền -->
+    <circle cx="300" cy="300" r="210"
+            fill="none"
+            stroke="rgba(255,255,255,0.08)"
+            stroke-width="2"/>
+
+    <!-- HỎA -->
+    <circle cx="300" cy="90" r="52" fill="#cc2e00" id="el-Hỏa" class="el-node"/>
+    <text x="300" y="86" text-anchor="middle" fill="white" font-size="13" font-family="Cinzel,serif" font-weight="bold">HỎA</text>
+    <text x="300" y="103" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="18">🔥</text>
+
+    <!-- THỔ -->
+    <circle cx="490" cy="240" r="52" fill="#a07020" id="el-Thổ" class="el-node"/>
+    <text x="490" y="236" text-anchor="middle" fill="white" font-size="13" font-family="Cinzel,serif" font-weight="bold">THỔ</text>
+    <text x="490" y="253" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="18">⛰️</text>
+
+    <!-- KIM -->
+    <circle cx="400" cy="460" r="52" fill="#707070" id="el-Kim" class="el-node"/>
+    <text x="400" y="456" text-anchor="middle" fill="white" font-size="13" font-family="Cinzel,serif" font-weight="bold">KIM</text>
+    <text x="400" y="473" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="18">⚔️</text>
+
+    <!-- THỦY -->
+    <circle cx="200" cy="460" r="52" fill="#005faa" id="el-Thủy" class="el-node"/>
+    <text x="200" y="456" text-anchor="middle" fill="white" font-size="13" font-family="Cinzel,serif" font-weight="bold">THỦY</text>
+    <text x="200" y="473" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="18">💧</text>
+
+    <!-- MỘC -->
+    <circle cx="110" cy="240" r="52" fill="#007a3a" id="el-Mộc" class="el-node"/>
+    <text x="110" y="236" text-anchor="middle" fill="white" font-size="13" font-family="Cinzel,serif" font-weight="bold">MỘC</text>
+    <text x="110" y="253" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="18">🌿</text>
+
+  </svg>
+
+</div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mystic-modal" id="mysticModal">
+  <div class="mystic-box">
+    <h2>Nhà ngươi có quên điều gì không?</h2>
+  </div>
+</div>
+
+<!-- ===== LUCKY ENVELOPE BUTTON ===== -->
+<div class="lixi-btn" onclick="openLixi()">
+  🧧
+</div>
+
+<!-- ===== LIXI PAGE ===== -->
+<div class="page-overlay" id="lixiPage">
+  <div class="page-content">
+    <button class="back-btn" onclick="closeLixi()">← Trở về</button>
+    <h2 class="page-title">🧧 Lì xì chủ thớt</h2>
+
+    <div class="lixi-container" id="lixiContainer">
+      <div class="lixi-item" onclick="openEnvelope(this)"></div>
+      <div class="lixi-item" onclick="openEnvelope(this)"></div>
+      <div class="lixi-item" onclick="openEnvelope(this)"></div>
+      <div class="lixi-item" onclick="openEnvelope(this)"></div>
+      <div class="lixi-item" onclick="openEnvelope(this)"></div>
+    </div>
+
+    <div class="lixi-result" id="lixiResult"></div>
+  </div>
+</div>
+
+<!-- ===== DONATE PAGE ===== -->
+<div class="page-overlay" id="donatePage">
+  <div class="page-content">
+
+    <button class="back-btn" onclick="closeDonate()">← Trở về</button>
+
+    <h2 class="page-title">🧧 Xin cảm ơn đã đô nết</h2>
+<div class="donate-images">
+    <img src="/assets/elements/1.png" class="donate-meme" alt="Meme">
+
+    <img src="/assets/elements/2.png" class="qr-image" alt="QR Code">
+</div>
+    <div class="qr-text">
+      Càng nhiều càng ít
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MAGIC CIRCLE OVERLAY — direct body child so position:fixed works -->
+<div id="magicCircleWrap" style="display:none"
+     class="magic-circle-wrap">
+  <canvas id="magicCircleCanvas"></canvas>
+  <div class="mc-label" id="mcLabel">⬡ ĐANG QUÉT THIÊN CƠ ⬡</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

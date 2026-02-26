@@ -1,0 +1,2999 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:black;
+  color:white;
+  overflow-x:hidden;
+  text-align:center;
+  transition:1s;
+}
+/* ===== MYSTIC HEADER ===== */
+.mystic-header{
+  position:relative;
+  padding:60px 20px;
+  background:linear-gradient(to bottom, rgba(10,10,30,0.9), rgba(0,0,0,0.8));
+  overflow:hidden;
+}
+
+.logo{
+  font-family:'Cinzel', serif;
+  letter-spacing:3px;
+  font-size:28px;
+  margin:0;
+  color:#ccc;
+}
+
+.slogan{
+  font-family:'Great Vibes', cursive;
+  font-size:42px;
+  margin-top:20px;
+  color:white;
+  text-shadow:
+    0 0 5px cyan,
+    0 0 15px purple,
+    0 0 25px blue;
+  animation: shimmer 4s infinite linear;
+}
+
+/* shimmer effect */
+@keyframes shimmer{
+  0% { text-shadow: 0 0 5px cyan; }
+  50% { text-shadow: 0 0 25px purple; }
+  100% { text-shadow: 0 0 5px cyan; }
+}
+
+/* ===== ZODIAC FLOAT ===== */
+.zodiac-layer{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+.zodiac-layer span{
+  position:absolute;
+  font-size:26px;
+  opacity:0;
+  animation: zodiacFloat 10s infinite ease-in-out;
+}
+
+.zodiac-layer span:nth-child(1){ left:5%; top:30%; animation-delay:1s;}
+.zodiac-layer span:nth-child(2){ left:15%; top:10%; animation-delay:3s;}
+.zodiac-layer span:nth-child(3){ left:25%; top:50%; animation-delay:5s;}
+.zodiac-layer span:nth-child(4){ left:40%; top:20%; animation-delay:2s;}
+.zodiac-layer span:nth-child(5){ left:60%; top:40%; animation-delay:4s;}
+.zodiac-layer span:nth-child(6){ left:75%; top:15%; animation-delay:6s;}
+.zodiac-layer span:nth-child(7){ left:85%; top:45%; animation-delay:7s;}
+.zodiac-layer span:nth-child(8){ left:30%; top:70%; animation-delay:8s;}
+.zodiac-layer span:nth-child(9){ left:55%; top:75%; animation-delay:9s;}
+.zodiac-layer span:nth-child(10){ left:10%; top:75%; animation-delay:10s;}
+.zodiac-layer span:nth-child(11){ left:80%; top:70%; animation-delay:11s;}
+.zodiac-layer span:nth-child(12){ left:50%; top:5%; animation-delay:12s;}
+
+@keyframes zodiacFloat{
+  0% { opacity:0; transform:translateY(20px) scale(0.8); }
+  50% { opacity:0.6; transform:translateY(-20px) scale(1.1); }
+  100% { opacity:0; transform:translateY(20px) scale(0.8); }
+}
+
+/* STAR CANVAS */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-100;   /* sửa từ -10 xuống -100 */
+  pointer-events:none;
+}
+
+/* ===== COSMIC BODY ===== */
+
+.cosmic-body{
+  margin-top:50px;
+  padding:40px 20px;
+  animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(30px);}
+  to{ opacity:1; transform:translateY(0);}
+}
+
+/* INPUT GROUP */
+
+.input-group{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
+
+.input-box{
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+}
+
+.input-box label{
+  margin-bottom:8px;
+  font-size:14px;
+  opacity:0.8;
+  letter-spacing:1px;
+}
+
+.input-box input{
+  width:260px;
+  padding:14px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(8px);
+  color:white;
+  font-size:15px;
+  border:1px solid rgba(255,255,255,0.2);
+  transition:0.4s;
+}
+
+.input-box input:focus{
+  box-shadow:0 0 20px cyan;
+  border:1px solid cyan;
+  transform:scale(1.05);
+}
+
+/* FEATURE GRID */
+
+.feature-grid{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+/* FEATURE CARD */
+
+.feature-card{
+  width:260px;
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
+  cursor:pointer;
+  transition:0.4s;
+  position:relative;
+  overflow:hidden;
+  animation:floatCard 6s infinite ease-in-out;
+}
+
+@keyframes floatCard{
+  0%,100%{ transform:translateY(0);}
+  50%{ transform:translateY(-10px);}
+}
+
+.feature-card:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px cyan;
+}
+
+/* glow effect */
+
+.feature-card::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:conic-gradient(transparent,cyan,transparent);
+  animation:rotateLight 6s linear infinite;
+  opacity:0.3;
+}
+
+.feature-card h3{
+  margin-bottom:15px;
+  font-size:18px;
+}
+
+.feature-card p{
+  font-size:14px;
+  opacity:0.7;
+}
+
+/* =========================
+   GOD MODE UPGRADE
+========================= */
+
+/* Blur background khi active */
+.cosmic-body.active{
+  filter:blur(8px);
+  transform:scale(0.95);
+  transition:0.6s;
+}
+
+/* FEATURE CARD nâng cấp */
+
+.feature-card{
+  position:relative;
+  overflow:hidden;
+}
+
+/* Neon border chạy quanh */
+
+.feature-card::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:20px;
+  padding:2px;
+  background:linear-gradient(90deg,cyan,purple,cyan);
+  background-size:300% 300%;
+  animation:neonMove 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+}
+
+@keyframes neonMove{
+  0%{ background-position:0% 50%;}
+  50%{ background-position:100% 50%;}
+  100%{ background-position:0% 50%;}
+}
+
+/* Zoom center effect */
+
+.feature-card.active{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(1.2);
+  z-index:999;
+  box-shadow:0 0 40px cyan;
+}
+
+/* ENERGY WAVE */
+
+.energy-wave{
+  position:fixed;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:2px solid cyan;
+  animation:waveExpand 1s ease-out forwards;
+  pointer-events:none;
+  z-index:1000;
+}
+
+@keyframes waveExpand{
+  to{
+    transform:scale(15);
+    opacity:0;
+  }
+}
+
+/* SVG icon animation */
+
+.feature-card svg{
+  width:50px;
+  margin-bottom:15px;
+  fill:none;
+  stroke:cyan;
+  stroke-width:2;
+  stroke-dasharray:150;
+  stroke-dashoffset:150;
+  animation:drawIcon 3s ease forwards;
+}
+
+@keyframes drawIcon{
+  to{ stroke-dashoffset:0;}
+}
+
+/* ==========================
+   PAGE OVERLAY
+========================== */
+
+.page-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  inset:0;
+  overflow-y:auto;
+  background:rgba(0,0,20,0.95);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transform:translateY(100%);
+  transition:0.8s ease;
+  z-index:2000;   /* đảm bảo cao hơn */
+}
+
+.page-overlay.show{
+  transform:translateY(0);
+}
+
+.page-content{
+  text-align:center;
+  animation:fadeUp 1s ease;
+
+}
+
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(40px);}
+  to{ opacity:1; transform:translateY(0);}
+}
+
+.page-title{
+  font-family:'Playfair Display', serif;
+  font-size:64px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#e6ccff;
+
+  text-shadow:
+    0 0 15px rgba(180,100,255,0.8),
+    0 0 40px rgba(0,255,255,0.6);
+
+  animation:titleGlow 2s infinite alternate;
+  margin-bottom:40px;
+}
+
+.back-btn{
+  position:fixed;
+  top:24px;
+  left:24px;
+  padding:10px 22px;
+  background:rgba(0,0,30,0.75);
+  backdrop-filter:blur(8px);
+  border:1px solid cyan;
+  color:cyan;
+  border-radius:20px;
+  cursor:pointer;
+  transition:0.3s;
+  z-index:9999;
+  font-size:14px;
+  letter-spacing:1px;
+}
+
+.back-btn:hover{
+  background:cyan;
+  color:black;
+}
+
+/* ==========================
+   MYSTIC MODAL WARNING
+========================== */
+
+.mystic-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,30,0.85);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.6s;
+  z-index:5000;
+}
+
+.mystic-modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.mystic-box{
+  padding:60px 80px;
+  border-radius:25px;
+  background:radial-gradient(circle at center,#1a0033,#000);
+  box-shadow:
+    0 0 30px purple,
+    0 0 60px cyan;
+  text-align:center;
+  animation:mysticPop 0.8s ease;
+}
+
+.mystic-box h2{
+  font-family:'Cormorant Garamond', serif;
+  font-size:36px;
+  font-weight:700;
+  letter-spacing:1px;
+  color:#e6b3ff;
+
+  text-shadow:
+    0 0 8px rgba(180,100,255,0.6),
+    0 0 20px rgba(0,255,255,0.4);
+}
+
+@keyframes mysticPop{
+  from{ transform:scale(0.5) rotate(-5deg); opacity:0;}
+  to{ transform:scale(1) rotate(0); opacity:1;}
+}
+
+@keyframes glowPulse{
+  from{ text-shadow:0 0 10px purple;}
+  to{ text-shadow:0 0 30px cyan;}
+}
+
+/* ==========================
+   LIFE PAGE UPGRADE
+========================== */
+
+.page-title{
+  font-size:64px;
+  letter-spacing:3px;
+  color:#e6ccff;
+  text-shadow:
+    0 0 15px rgba(180,100,255,0.8),
+    0 0 40px rgba(0,255,255,0.6);
+  animation:titleGlow 2s infinite alternate;
+  margin-bottom:40px;
+    white-space: nowrap;
+}
+
+@keyframes titleGlow{
+  from{ text-shadow:0 0 10px purple;}
+  to{ text-shadow:0 0 40px cyan;}
+}
+
+.life-number{
+  font-size:56px;
+  font-weight:bold;
+  margin-bottom:50px;
+  color:#ffffff;
+  text-shadow:
+    0 0 20px cyan,
+    0 0 40px purple;
+  animation:numberFade 1.2s ease;
+}
+
+@keyframes numberFade{
+  from{ opacity:0; transform:translateY(20px);}
+  to{ opacity:1; transform:translateY(0);}
+}
+
+/* STAT BAR */
+
+.stat{
+  width:400px;
+  margin:25px auto;
+}
+
+.stat span{
+  display:flex;
+  justify-content:space-between;
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.progress{
+  width:100%;
+  height:22px;
+  background:rgba(255,255,255,0.1);
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+}
+
+.progress div{
+  height:100%;
+  width:0%;
+  border-radius:20px;
+  background:linear-gradient(90deg,cyan,purple);
+  transition:2s ease;
+  position:relative;
+}
+
+/* ánh sáng chạy bên trong bar */
+
+.progress div::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-50%;
+  width:50%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+  animation:barShine 2s infinite;
+}
+
+@keyframes barShine{
+  0%{ left:-50%; }
+  100%{ left:150%; }
+}
+
+/* ===== FLOATING POEM ===== */
+
+.floating-poem{
+  position:fixed;
+  font-size:26px;
+  font-weight:bold;
+  color:#ffd700;
+  text-shadow:0 0 15px orange;
+  pointer-events:none;   /* QUAN TRỌNG */
+  white-space:nowrap;
+  opacity:0;
+  z-index:1000;
+}
+
+@keyframes floatPoem{
+  0%{
+    transform:translate(0,0) rotate(-5deg);
+    opacity:0;
+  }
+  20%{
+    opacity:1;
+  }
+  100%{
+    transform:translate(800px,-300px) rotate(10deg);
+    opacity:0;
+  }
+}
+#stars{
+  pointer-events:none;
+}
+
+/* ==========================
+   ZODIAC PAGE
+========================== */
+
+.zodiac-result{
+  font-size:60px;
+  font-weight:bold;
+  margin-top:30px;
+  opacity:0;
+  transform:scale(0.5);
+  transition:1s;
+  text-shadow:0 0 20px cyan, 0 0 40px purple;
+}
+
+.zodiac-result.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.zodiac-description{
+  margin-top:30px;
+  font-size:20px;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+  opacity:0;
+  transition:1s;
+}
+
+.zodiac-description.show{
+  opacity:1;
+}
+
+/* ==========================
+   ZODIAC SUMMON EFFECT
+========================== */
+
+#zodiacCanvas{
+  position:absolute;
+  inset:0;
+  z-index:0;   /* đổi từ 1 xuống 0 */
+  pointer-events:none;
+}
+
+.zodiac-bg{
+  position:absolute;
+  inset:0;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  opacity:0;
+  filter:blur(20px) brightness(1.2);
+  transition:2s;
+  z-index:0;
+}
+
+.zodiac-bg.show{
+  opacity:0.25;
+  filter:blur(5px) brightness(1.5);
+}
+
+.zodiac-spirit{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:1.5s ease;
+  z-index:0;
+}
+
+.zodiac-spirit svg{
+  width:600px;
+  opacity:0.15;
+  stroke:white;
+  stroke-width:2;
+  fill:none;
+  filter: drop-shadow(0 0 20px white);
+}
+
+.zodiac-spirit.show{
+  opacity:1;
+}
+
+/* ===== ZODIAC IMAGE - CỐ ĐỊNH BÊN PHẢI ===== */
+
+.zodiac-image{
+  position:fixed;
+  right:60px;
+  top:50%;
+  transform:translateY(-50%);
+  width:260px;
+  border-radius:20px;
+  box-shadow:
+    0 0 30px rgba(255,215,0,0.7),
+    0 0 80px rgba(0,255,255,0.4);
+  opacity:0;
+  transition:opacity 0.6s ease, box-shadow 0.4s ease;
+  cursor:pointer;
+  z-index:20;
+  pointer-events:auto;
+}
+
+/* Khi hiện */
+.zodiac-image.show{
+  opacity:1;
+}
+
+/* Hover animation */
+.zodiac-image:hover{
+  box-shadow:
+    0 0 40px gold,
+    0 0 100px cyan;
+  filter:brightness(1.1);
+}
+
+@media (max-width: 900px){
+  .zodiac-image{
+    position:relative;
+    right:auto;
+    top:auto;
+    transform:none;
+    width:200px;
+    margin:20px auto 0;
+    display:block;
+  }
+}
+
+.energy-result{
+  font-size:48px;
+  font-weight:bold;
+  margin-top:0;
+  opacity:0;
+  transform:scale(0.5);
+  transition:1s;
+  text-shadow:0 0 30px cyan;
+  text-align:center;
+}
+
+.energy-result.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.energy-prophecy,
+.energy-relations{
+  margin-top:10px;
+  font-size:20px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s;
+}
+
+.energy-prophecy{
+  margin-top:8px;
+  font-size:13px;
+  line-height:1.6;
+  text-align:justify;
+  padding:0 10px;
+}
+
+.energy-result,
+.energy-prophecy,
+.energy-relations{
+  opacity:0;
+  transform:translateY(15px);
+}
+
+.energy-prophecy.show,
+.energy-relations.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Aura theo từng mệnh */
+
+.energy-Kim { text-shadow:0 0 30px silver; color:#ddd; }
+.energy-Mộc { text-shadow:0 0 30px lime; color:#66ff99; }
+.energy-Thủy { text-shadow:0 0 30px cyan; color:#66ccff; }
+.energy-Hỏa { text-shadow:0 0 30px red; color:#ff6666; }
+.energy-Thổ { text-shadow:0 0 30px orange; color:#ffcc66; }
+
+/* ==========================
+   FIVE ELEMENT CIRCLE
+========================== */
+
+.five-circle{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:0;
+  pointer-events:none;
+}
+
+.five-circle::before{
+  content:"";
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,0.2);
+  animation:rotateCircle 25s linear infinite;
+  box-shadow:0 0 40px rgba(0,255,255,0.4);
+}
+
+@keyframes rotateCircle{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* Aura màu theo từng mệnh */
+
+.five-Kim::before{
+  border-color:#cccccc;
+  box-shadow:0 0 60px silver;
+}
+
+.five-Mộc::before{
+  border-color:#00ff88;
+  box-shadow:0 0 60px #00ff88;
+}
+
+.five-Thủy::before{
+  border-color:#00ccff;
+  box-shadow:0 0 60px #00ccff;
+}
+
+.five-Hỏa::before{
+  border-color:#ff4444;
+  box-shadow:0 0 60px red;
+}
+
+.five-Thổ::before{
+  border-color:#ffaa33;
+  box-shadow:0 0 60px orange;
+}
+
+.five-circle{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:0;
+  pointer-events:none;
+}
+
+
+
+.inner-ring{
+  fill:none;
+  stroke:rgba(180,100,255,0.2);
+  stroke-width:2;
+  animation:rotateReverse 25s linear infinite;
+  transform-origin:center;
+}
+
+.link{
+  stroke:rgba(255,255,255,0.2);
+  stroke-width:1;
+}
+
+@keyframes rotateSlow{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+@keyframes rotateReverse{
+  from{ transform:rotate(360deg); }
+  to{ transform:rotate(0deg); }
+}
+
+.energy-layout{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:100px;
+}
+
+.energy-left,
+.energy-right{
+  position:relative;
+}
+
+.energy-right{
+  animation:fadeInRight 1.2s ease;
+}
+
+@keyframes fadeInRight{
+  from{
+    opacity:0;
+    transform:translateX(50px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+/* result-circle removed */
+
+/* ===== 2-CARD LAYOUT (energy-left) ===== */
+.energy-left{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  align-items:center;
+}
+
+.energy-card{
+  width:280px;
+  border-radius:18px;
+  border:1px solid rgba(0,255,255,0.35);
+  background:rgba(0,0,30,0.75);
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 30px rgba(0,255,255,0.2), inset 0 0 20px rgba(0,255,255,0.05);
+  overflow:hidden;
+  transition:box-shadow 0.4s;
+}
+
+.energy-card:hover{
+  box-shadow:0 0 55px rgba(0,255,255,0.45), inset 0 0 25px rgba(0,255,255,0.1);
+}
+
+.energy-card-top{
+  min-height:220px;
+  padding:24px 20px;
+}
+
+.energy-card-bottom{
+  min-height:180px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.energy-card-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:100%;
+  gap:10px;
+}
+
+.energy-card-rune{
+  font-size:12px;
+  letter-spacing:6px;
+  color:rgba(0,255,255,0.5);
+}
+
+/* SVG phải */
+.five-svg{
+  width:500px;
+  height:500px;
+}
+
+.outer-ring{
+  fill:none;
+  stroke:rgba(0,255,255,0.4);
+  stroke-width:3;
+}
+
+.star-shape{
+  fill:none;
+  stroke:#ff4444;
+  stroke-width:3;
+  filter:drop-shadow(0 0 10px red);
+}
+
+.element-text{
+  fill:white;
+  font-size:22px;
+  text-anchor:middle;
+  dominant-baseline:middle;
+  opacity:0.6;
+  transition:0.5s;
+}
+
+.element-active{
+  fill:#00ffff;
+  font-size:28px;
+  opacity:1;
+  filter:drop-shadow(0 0 10px cyan);
+}
+
+.element-text{
+  font-size:22px;
+  font-weight:bold;
+  text-anchor:middle;
+  dominant-baseline:middle;
+  opacity:0.6;
+  transition:0.5s;
+}
+
+/* Màu cố định từng hành */
+.fire{ fill:#ff3333; }
+.earth{ fill:#c09040; }
+.metal{ fill:#dddddd; }
+.water{ fill:#00ccff; }
+.wood{ fill:#33cc66; }
+
+/* Khi active */
+.element-active{
+  font-size:28px;
+  opacity:1;
+  filter:drop-shadow(0 0 15px white)
+         drop-shadow(0 0 25px currentColor);
+}
+
+.star-line{ display:none; }
+
+.el-node{
+  transition: opacity 0.3s, filter 0.3s;
+  cursor: pointer;
+}
+
+.element-active-circle{
+  stroke: white;
+  stroke-width: 4;
+  animation: elementGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes elementGlow{
+  0%  { filter: drop-shadow(0 0 12px white); }
+  50% { filter: drop-shadow(0 0 28px white) drop-shadow(0 0 10px cyan); }
+  100%{ filter: drop-shadow(0 0 12px white); }
+}
+
+#bgRing{
+  animation:ringGlow 6s ease-in-out infinite;
+}
+
+@keyframes ringGlow{
+  0%{
+    opacity:0.2;
+  }
+  50%{
+    opacity:0.6;
+  }
+  100%{
+    opacity:0.2;
+  }
+}
+
+@keyframes prophecyReveal{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+    filter:blur(4px);
+  }
+  60%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+  100%{
+    opacity:1;
+  }
+}
+
+
+
+@keyframes resultAppear{
+  0%{
+    opacity:0;
+    transform:scale(0.8);
+    text-shadow:0 0 0px transparent;
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.05);
+    text-shadow:0 0 20px currentColor;
+  }
+  100%{
+    transform:scale(1);
+    text-shadow:0 0 10px currentColor;
+  }
+}
+
+
+
+@keyframes waterFlicker{
+  0%{
+    opacity:1;
+    text-shadow:0 0 10px #00ccff;
+  }
+  50%{
+    opacity:0.8;
+    text-shadow:0 0 25px #00ccff,
+                0 0 40px #00ccff;
+  }
+  100%{
+    opacity:1;
+    text-shadow:0 0 10px #00ccff;
+  }
+}
+
+@keyframes revealUp{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+    filter:blur(5px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+.show-step{
+  animation:revealUp 2s ease forwards;
+}
+
+
+
+
+
+/* ===== LIXI BUTTON ===== */
+.lixi-btn{
+  position:fixed;
+  bottom:40px;
+  right:40px;
+  font-size:50px;
+  cursor:pointer;
+  z-index:3000;
+  transition:0.4s;
+  animation:floatLixi 3s ease-in-out infinite;
+}
+
+.lixi-btn:hover{
+  transform:scale(1.2) rotate(-10deg);
+}
+
+@keyframes floatLixi{
+  0%,100%{ transform:translateY(0);}
+  50%{ transform:translateY(-15px);}
+}
+
+/* ===== LIXI ITEMS ===== */
+.lixi-container{
+  display:flex;
+  gap:30px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:50px;
+}
+
+.lixi-item{
+  width:120px;
+  height:180px;
+  background:linear-gradient(145deg,#b30000,#ff1a1a);
+  border-radius:15px;
+  box-shadow:0 0 25px red;
+  cursor:pointer;
+  position:relative;
+  transition:0.5s;
+}
+
+.lixi-item::before{
+  content:"🧧";
+  position:absolute;
+  font-size:60px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.lixi-item:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 40px gold;
+}
+
+.lixi-opened{
+  background:linear-gradient(145deg,#222,#444);
+  box-shadow:0 0 30px gold;
+}
+
+.lixi-result{
+  margin-top:40px;
+  font-size:40px;
+  font-weight:bold;
+  text-shadow:0 0 20px gold;
+}
+
+.lixi-again-btn{
+  padding:12px 30px;
+  font-size:18px;
+  border-radius:25px;
+  border:2px solid gold;
+  background:linear-gradient(145deg,#ff0000,#b30000);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 0 20px gold;
+}
+
+.lixi-again-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 35px gold;
+}
+
+/* ===== DONATE PAGE ===== */
+
+.donate-meme{
+  width:320px;
+  margin-top:40px;
+  border-radius:20px;
+  box-shadow:
+    0 0 40px red,
+    0 0 80px purple;
+  animation:floatMeme 3s ease-in-out infinite;
+}
+
+@keyframes floatMeme{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
+}
+
+.qr-image{
+  width:280px;
+  margin-top:30px;
+  border-radius:20px;
+  box-shadow:
+    0 0 40px cyan,
+    0 0 80px gold;
+}
+
+.qr-text{
+  margin-top:25px;
+  font-size:26px;
+  font-weight:bold;
+  color:gold;
+  text-shadow:
+    0 0 15px orange,
+    0 0 30px gold;
+}
+
+/* ===== DONATE IMAGE LAYOUT ===== */
+
+.donate-images{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:80px;   /* chỉnh khoảng cách ở đây */
+  margin-top:40px;
+}
+
+html, body{
+  height:auto;
+  overflow-y:auto !important;
+}
+/* ======================================================
+   NÂNG CẤP 1: CONSTELLATION CANVAS
+====================================================== */
+
+/* Canvas chòm sao — luôn cố định bên TRÁI màn hình */
+#zodiacCanvas{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  width:360px !important;
+  height:100vh !important;
+  z-index:3000 !important;
+  pointer-events:none !important;
+  display:none;
+}
+
+/* zodiacPage: gradient — trái trong suốt (để chòm sao nổi bật), phải tối */
+#zodiacPage{
+  background: linear-gradient(
+    to right,
+    rgba(0,0,10,0.75) 0%,
+    rgba(0,0,15,0.92) 400px,
+    rgba(0,0,15,0.96) 100%
+  ) !important;
+  backdrop-filter:none !important;
+}
+
+/* Zodiac page-content: căn GIỮA, nền nhẹ sau chữ */
+#zodiacPage .page-content{
+  position:relative;
+  z-index:2010;
+  max-width:660px;
+  width:100%;
+  margin:0 auto;
+  text-align:center;
+  padding:90px 40px 60px;
+  background: radial-gradient(
+    ellipse 80% 90% at center,
+    rgba(0,0,20,0.55) 0%,
+    rgba(0,0,20,0.25) 60%,
+    transparent 100%
+  );
+  border-radius:24px;
+}
+#zodiacPage .page-content .page-title{ text-align:center; }
+#zodiacPage .page-content .zodiac-result{ text-align:center; }
+#zodiacPage .page-content .zodiac-description{ text-align:center; }
+
+/* Ảnh zodiac bên phải */
+#zodiacPage .zodiac-image{
+  z-index:2005;
+}
+
+/* Nút trở về luôn ở góc trên trái */
+#zodiacPage .back-btn{
+  position:fixed !important;
+  top:24px !important;
+  left:24px !important;
+  z-index:9999 !important;
+}
+
+/* ======================================================
+   NÂNG CẤP 3: ELEMENT AURA THEMES
+====================================================== */
+
+:root{
+  --aura-primary: #00d4ff;
+  --aura-secondary: #7b2fff;
+  --aura-glow: rgba(0,212,255,0.5);
+}
+
+/* === FIRE THEME === */
+body.theme-fire .feature-card::after{
+  background:linear-gradient(90deg,#ff4500,#ff8c00,#ff4500);
+  background-size:300% 300%;
+}
+body.theme-fire .feature-card:hover{
+  box-shadow:0 0 30px #ff4500, 0 0 60px #ff6600;
+}
+body.theme-fire .zodiac-result{
+  text-shadow:0 0 20px #ff4500, 0 0 50px #ff8c00;
+}
+body.theme-fire .page-title{
+  text-shadow:0 0 15px #ff4500, 0 0 40px #ff8c00;
+}
+body.theme-fire .back-btn{
+  border-color:#ff4500;
+  color:#ff6600;
+}
+body.theme-fire .back-btn:hover{
+  background:#ff4500;
+  color:white;
+}
+body.theme-fire .input-box input:focus{
+  box-shadow:0 0 20px #ff4500;
+  border-color:#ff4500;
+}
+
+/* === WATER THEME === */
+body.theme-water .feature-card::after{
+  background:linear-gradient(90deg,#006994,#00bfff,#006994);
+  background-size:300% 300%;
+}
+body.theme-water .feature-card:hover{
+  box-shadow:0 0 30px #00bfff, 0 0 60px #006994;
+}
+body.theme-water .zodiac-result{
+  text-shadow:0 0 20px #00bfff, 0 0 50px #0077ff;
+}
+body.theme-water .page-title{
+  text-shadow:0 0 15px #00bfff, 0 0 40px #006994;
+  color:#b0e0ff;
+}
+body.theme-water .back-btn{
+  border-color:#00bfff;
+  color:#00bfff;
+}
+body.theme-water .back-btn:hover{
+  background:#00bfff;
+  color:#000;
+}
+/* Ripple effect for water */
+body.theme-water::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 30% 80%, rgba(0,100,200,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 20%, rgba(0,180,255,0.1) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+  animation:waterRipple 6s ease-in-out infinite;
+}
+@keyframes waterRipple{
+  0%,100%{ opacity:0.5; transform:scale(1); }
+  50%{ opacity:1; transform:scale(1.05); }
+}
+
+/* === AIR THEME === */
+body.theme-air .feature-card::after{
+  background:linear-gradient(90deg,#c0c0c0,#e8e8ff,#c0c0c0);
+  background-size:300% 300%;
+}
+body.theme-air .zodiac-result{
+  text-shadow:0 0 20px #e8e8ff, 0 0 40px rgba(200,200,255,0.8);
+}
+body.theme-air .page-title{
+  text-shadow:0 0 15px #e8e8ff, 0 0 40px rgba(200,200,255,0.6);
+  color:#f0f0ff;
+}
+body.theme-air .back-btn{
+  border-color:#c0c0c0;
+  color:#e0e0ff;
+}
+/* Fog overlay for air */
+body.theme-air::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(200,200,255,0.08) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+  animation:airFog 8s ease-in-out infinite;
+}
+@keyframes airFog{
+  0%,100%{ opacity:0.5; }
+  50%{ opacity:1; }
+}
+
+/* === EARTH THEME === */
+body.theme-earth .feature-card::after{
+  background:linear-gradient(90deg,#556b2f,#8b6914,#556b2f);
+  background-size:300% 300%;
+}
+body.theme-earth .zodiac-result{
+  text-shadow:0 0 20px #8b6914, 0 0 50px #c8a96e;
+}
+body.theme-earth .page-title{
+  text-shadow:0 0 15px #8b6914, 0 0 40px #c8a96e;
+  color:#d4b896;
+}
+body.theme-earth .back-btn{
+  border-color:#8b6914;
+  color:#c8a96e;
+}
+body.theme-earth .back-btn:hover{
+  background:#8b6914;
+  color:white;
+}
+
+/* ======================================================
+   AURA PARTICLES
+====================================================== */
+
+.aura-particle{
+  position:absolute;
+  pointer-events:none;
+  z-index:1;
+  user-select:none;
+}
+
+@keyframes particleFireRise{
+  0%{ opacity:0; transform:translateY(0) scale(0.5); }
+  20%{ opacity:0.9; }
+  100%{ opacity:0; transform:translateY(-400px) translateX(var(--dx,0px)) scale(1.5); }
+}
+
+@keyframes particleWaterFall{
+  0%{ opacity:0; transform:translateY(-20px) scale(0.8); }
+  20%{ opacity:0.8; }
+  100%{ opacity:0; transform:translateY(200px) translateX(var(--dx,0px)) scale(0.5); }
+}
+
+@keyframes particleAirDrift{
+  0%{ opacity:0; transform:translateX(0) scale(0.7); }
+  20%{ opacity:0.7; }
+  100%{ opacity:0; transform:translateX(100vw) translateY(var(--dy,-50px)) scale(1.2); }
+}
+
+@keyframes particleLeafFall{
+  0%{ opacity:0; transform:translateY(-30px) rotate(0deg); }
+  20%{ opacity:0.8; }
+  100%{
+    opacity:0;
+    transform:translateY(100vh) translateX(var(--dx,80px)) rotate(360deg);
+  }
+}
+
+/* ======================================================
+   NÂNG CẤP 4: COMPATIBILITY GRID + COLLISION
+====================================================== */
+
+.compat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-top:10px;
+}
+
+.compat-item{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+  padding:14px 18px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.compat-item:hover{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,215,0,0.5);
+  box-shadow:0 0 20px rgba(255,215,0,0.3);
+  transform:scale(1.03);
+}
+
+.compat-item::before{
+  content:"⚡";
+  position:absolute;
+  right:10px;
+  top:10px;
+  opacity:0;
+  transition:0.3s;
+  font-size:14px;
+}
+
+.compat-item:hover::before{
+  opacity:0.7;
+}
+
+.compat-label{
+  font-size:15px;
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#e6ccff;
+}
+
+.compat-bar-wrap{
+  width:100%;
+  height:8px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.compat-bar{
+  height:100%;
+  width:0%;
+  border-radius:10px;
+  background:linear-gradient(90deg,#ff69b4,#ff1493);
+  transition:width 1.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.compat-percent{
+  font-size:13px;
+  margin-top:6px;
+  opacity:0.8;
+  color:#ffd700;
+}
+
+/* ======================================================
+   COLLISION OVERLAY
+====================================================== */
+
+#collisionOverlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  cursor:pointer;
+}
+
+/* ======================================================
+   ZODIAC HEADER LAYOUT
+====================================================== */
+
+.zodiac-header{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* ======================================================
+   COLLISION RESULT TEXT (HTML overlay)
+====================================================== */
+
+#collisionResultText{
+  font-family:'Cinzel', 'Cormorant Garamond', serif;
+}
+
+@keyframes collisionPulse{
+  0%,100%{ transform:translate(-50%,-50%) scale(1); }
+  50%{ transform:translate(-50%,-50%) scale(1.05); }
+}
+/* ==============================================
+   REMASTERED ENERGY PAGE - NEW CSS
+============================================== */
+
+/* === AMBIENT ENVIRONMENT THEMES === */
+body.env-hoa {
+  background: radial-gradient(ellipse at bottom, #1a0000 0%, #000 60%) !important;
+}
+body.env-thuy {
+  background: radial-gradient(ellipse at top, #000a1a 0%, #000 60%) !important;
+}
+body.env-moc {
+  background: radial-gradient(ellipse at center, #001a08 0%, #000 60%) !important;
+}
+body.env-kim {
+  background: radial-gradient(ellipse at center, #0d0d14 0%, #000 60%) !important;
+}
+body.env-tho {
+  background: radial-gradient(ellipse at bottom center, #120a00 0%, #000 60%) !important;
+}
+
+/* === ASCENSION REVEAL === */
+@keyframes orbAppear {
+  from { opacity:0; transform:scale(0) rotate(-180deg); }
+  to   { opacity:1; transform:scale(1) rotate(0deg); }
+}
+@keyframes supernovaRing {
+  0%   { width:100px; height:100px; opacity:1; left:50%; top:50%; transform:translate(-50%,-50%); }
+  100% { width:600px; height:600px; opacity:0; left:50%; top:50%; transform:translate(-50%,-50%); }
+}
+@keyframes pulse {
+  0%,100% { opacity:0.7; }
+  50%     { opacity:1; }
+}
+
+/* === TAROT CARD === */
+.tarot-card {
+  width: 320px;
+  height: 460px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.tarot-front, .tarot-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front (mystery side) */
+.tarot-front {
+  background: radial-gradient(ellipse at 40% 30%, #1a003a, #000015);
+  border: 1px solid rgba(150, 80, 255, 0.5);
+  box-shadow: 0 0 30px rgba(120, 0, 255, 0.4), inset 0 0 40px rgba(100, 0, 200, 0.2);
+}
+.tarot-front-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+.tarot-rune {
+  font-size: 16px;
+  color: rgba(200, 150, 255, 0.6);
+  letter-spacing: 8px;
+  animation: runeGlow 3s ease-in-out infinite alternate;
+}
+@keyframes runeGlow {
+  from { opacity: 0.4; text-shadow: none; }
+  to   { opacity: 0.9; text-shadow: 0 0 15px rgba(200,100,255,0.8); }
+}
+.tarot-front-symbol {
+  font-size: 80px;
+  filter: drop-shadow(0 0 20px rgba(180, 80, 255, 0.8));
+  animation: floatSymbol 4s ease-in-out infinite;
+}
+@keyframes floatSymbol {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-12px) scale(1.05); }
+}
+.tarot-tap-hint {
+  font-size: 13px;
+  color: rgba(200, 150, 255, 0.6);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 0.4; }
+  50%     { opacity: 1; }
+}
+
+/* Back (reveal side) */
+.tarot-back {
+  background: radial-gradient(ellipse at 40% 20%, #0a001a, #000010);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  transform: rotateY(180deg);
+  overflow: hidden;
+}
+.tarot-back-inner {
+  padding: 28px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+.tarot-element-name {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.tarot-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+.tarot-divider {
+  height: 1px;
+  opacity: 0.4;
+  margin: 4px 0;
+}
+.tarot-section {
+  text-align: left;
+}
+.tarot-section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.tarot-section-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.6;
+}
+.tarot-cycle-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.tarot-cycle {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.cycle-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 4px;
+}
+.cycle-val {
+  font-family: 'Cinzel', serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* === ENERGY FLOW LINES ANIMATIONS === */
+@keyframes sinhFlowLine {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -42; }
+}
+@keyframes khacFlowLine {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 32; }
+}
+
+/* === SUPER ELEMENT PULSE === */
+@keyframes superElementPulse {
+  0%,100% {
+    filter: drop-shadow(0 0 25px white) drop-shadow(0 0 45px currentColor);
+    stroke-width: 5;
+  }
+  50% {
+    filter: drop-shadow(0 0 40px white) drop-shadow(0 0 80px currentColor);
+    stroke-width: 8;
+  }
+}
+
+/* === TOOLTIP APPEAR === */
+@keyframes tooltipAppear {
+  from { opacity: 0; transform: translate(-50%, -90%); }
+  to   { opacity: 1; transform: translate(-50%, -100%); }
+}
+
+/* === ELEMENT SVG HOVER (interactive) === */
+#el-Kim, #el-Mộc, #el-Thủy, #el-Hỏa, #el-Thổ {
+  transition: filter 0.3s ease;
+}
+#el-Kim:hover, #el-Mộc:hover, #el-Thủy:hover, #el-Hỏa:hover, #el-Thổ:hover {
+  filter: brightness(1.4) drop-shadow(0 0 12px white);
+  cursor: pointer;
+}
+/* === ORACLE CARD (lá bài tiên tri) === */
+.tarot-back-oracle {
+  border-color: rgba(200, 150, 255, 0.25);
+  box-shadow: 0 0 40px rgba(150, 0, 255, 0.3);
+  background: radial-gradient(ellipse at 30% 20%, #0d0020, #000010);
+}
+
+.tarot-oracle-inner {
+  padding: 22px 20px;
+  gap: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,150,255,0.3) transparent;
+}
+.tarot-oracle-inner::-webkit-scrollbar {
+  width: 4px;
+}
+.tarot-oracle-inner::-webkit-scrollbar-thumb {
+  background: rgba(200,150,255,0.3);
+  border-radius: 4px;
+}
+
+.tarot-oracle-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.75;
+  text-align: justify;
+  font-style: italic;
+}
+
+.tarot-oracle-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* 2 lá bài song song — container */
+.energy-card-bottom {
+  width: auto !important;
+  max-width: 720px;
+  padding: 20px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#tarotCardWrapper {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* ============================================================
+   LIFE PREDICTION CINEMATIC REMASTER — CSS
+============================================================ */
+
+/* === FOG MIRROR === */
+.fog-mirror-wrap {
+  position: relative;
+  display: inline-block;
+  margin: 20px auto;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, #0a0020, #000010);
+  border: 1px solid rgba(180, 100, 255, 0.3);
+  box-shadow: 0 0 40px rgba(100, 0, 200, 0.3), inset 0 0 30px rgba(80, 0, 150, 0.2);
+  padding: 28px 24px 16px;
+  transition: opacity 0.7s, transform 0.7s, box-shadow 0.5s;
+}
+
+.fog-ghost-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 96px;
+  font-weight: 900;
+  color: #e6ccff;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: -2px;
+  filter: blur(22px);
+  opacity: 0.3;
+  transition: filter 0.4s, opacity 0.4s;
+  user-select: none;
+  pointer-events: none;
+}
+
+.fog-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 20px;
+  cursor: crosshair;
+  z-index: 2;
+}
+
+.fog-hint {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: rgba(200, 150, 255, 0.7);
+  letter-spacing: 2px;
+  margin-top: 12px;
+  text-align: center;
+  animation: blink 2s infinite;
+  transition: opacity 0.5s;
+  position: relative;
+  z-index: 3;
+}
+
+/* === HOURGLASS === */
+/* === HOURGLASS (PREMIUM) === */
+.hourglass-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 16px auto 28px;
+  transition: opacity 1s, transform 1s;
+  position: relative;
+}
+
+/* Ambient radial glow behind canvas */
+.hourglass-wrap::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(ellipse at center,
+    rgba(250, 190, 50, 0.08) 0%,
+    rgba(120, 60, 200, 0.05) 50%,
+    transparent 70%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: hgAmbient 3s ease-in-out infinite alternate;
+}
+
+@keyframes hgAmbient {
+  from { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  to   { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
+}
+
+#hourglassCanvas {
+  filter: drop-shadow(0 0 12px rgba(250,190,50,0.3)) drop-shadow(0 4px 20px rgba(0,0,0,0.6));
+  transition: filter 1s;
+  display: block;
+}
+
+/* Stats row above/below hourglass */
+.hg-stats-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.hg-stat-pill {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.hg-stat-pill strong {
+  display: block;
+  font-size: 28px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.hg-stat-pill.lived strong { color: #f59e0b; text-shadow: 0 0 14px #f59e0b88; }
+.hg-stat-pill.remain strong { color: #34d399; text-shadow: 0 0 14px #34d39988; }
+
+.hg-footer-glow {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(255, 220, 100, 0.0);
+  text-shadow: 0 0 20px gold;
+  transition: opacity 1s, color 1s;
+  height: 20px;
+}
+
+/* === THREAD OF FATE (PREMIUM) === */
+.thread-wrap {
+  margin: 8px auto 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 1s, transform 1s;
+  width: 100%;
+  max-width: 740px;
+}
+
+.thread-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: rgba(200, 170, 255, 0.85);
+  text-shadow: 0 0 20px rgba(150, 100, 255, 0.5);
+  margin-bottom: 2px;
+}
+
+.thread-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(150, 130, 200, 0.55);
+  margin-bottom: 8px;
+}
+
+#threadCanvas {
+  display: block;
+  border-radius: 14px;
+  background: linear-gradient(135deg,
+    rgba(5, 0, 20, 0.85) 0%,
+    rgba(10, 0, 35, 0.9) 50%,
+    rgba(5, 0, 20, 0.85) 100%);
+  border: 1px solid rgba(100, 60, 200, 0.2);
+  box-shadow:
+    0 0 30px rgba(80, 30, 180, 0.15),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* === FINAL LIFE RESULT === */
+.life-final-result {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.8s, transform 0.8s;
+  margin: 16px auto 24px;
+}
+
+.lf-years {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.lf-unit {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.7;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
+
+.lf-destiny {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: rgba(230, 200, 255, 0.9);
+  margin-top: 8px;
+  text-shadow: 0 0 12px purple;
+}
+
+.lf-bonus {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 14px;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+  animation: bonusPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes bonusPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; text-shadow: 0 0 18px #00ff88; }
+}
+
+/* === CẢI MỆNH === */
+.canh-menh-section {
+  margin: 28px auto;
+  max-width: 680px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s, transform 0.9s;
+  position: relative;
+}
+
+.canh-menh-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #e6ccff;
+  text-shadow: 0 0 15px rgba(180, 100, 255, 0.7);
+  margin-bottom: 6px;
+}
+
+.canh-menh-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: rgba(200, 180, 255, 0.6);
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.canh-menh-cards {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.canh-card {
+  width: 110px;
+  padding: 18px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.canh-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: rotateLight 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.canh-card:hover::before {
+  opacity: 1;
+}
+
+.canh-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.canh-card.canh-used {
+  cursor: default;
+  transform: scale(0.97);
+  opacity: 0.7;
+}
+
+.canh-card.canh-used::after {
+  content: '✓';
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 12px;
+  color: #00ff88;
+}
+
+.canh-emoji {
+  font-size: 32px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.canh-label {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
+}
+
+.canh-years {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.canh-desc {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.4;
+}
+
+/* Particle burst on use */
+.canh-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100;
+  animation: canhParticleBurst 0.8s ease-out forwards;
+}
+
+@keyframes canhParticleBurst {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+
+/* ============================================================
+   LIFESTYLE QUIZ PANEL
+============================================================ */
+.lifestyle-panel{max-width:600px;margin:0 auto 30px;animation:fadeUp .8s ease}
+.lifestyle-sub{font-family:'Playfair Display';font-size:18px;color:rgba(180,150,255,.75);letter-spacing:1.5px;line-height:1.8;margin-bottom:20px;text-shadow:0 0 6px rgba(180,150,255,0.5),0 0 14px rgba(120,80,255,0.4);animation: mysticSubGlow 3.5s ease-in-out infinite;}
+.lifestyle-questions{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;text-align:left}
+.lq-item{background:rgba(255,255,255,.03);border:1px solid rgba(100,60,200,.22);border-radius:14px;padding:13px 17px;transition:border-color .3s,box-shadow .3s}
+.lq-item:has(.lq-btn.selected){border-color:rgba(0,220,180,.45);box-shadow:0 0 16px rgba(0,200,160,.1)}
+.lq-label{font-family:'Playfair Display',serif;font-size:15px;letter-spacing:1.5px;color:rgba(190,165,255,.8);margin-bottom:9px}
+.lq-options{display:flex;gap:7px;flex-wrap:wrap}
+.lq-btn{flex:1;min-width:100px;padding:8px 11px;border-radius:30px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);font-family:'Playfair Display';font-size:13px;letter-spacing:.5px;cursor:pointer;transition:all .22s ease}
+.lq-btn:hover{background:rgba(0,180,255,.08);border-color:rgba(0,180,255,.4);color:white}
+.lq-btn.selected{background:rgba(0,200,180,.18);border-color:#00ddcc;color:#00ffee;box-shadow:0 0 12px rgba(0,200,180,.25)}
+.cosmic-predict-btn{display:block;width:100%;max-width:340px;padding:15px 32px;border-radius:50px;background:rgba(0,5,25,.85);border:1px solid rgba(0,180,255,.4);color:#00ccff;font-family:'Playfair Display';font-size:18px;letter-spacing:2px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s ease;box-shadow:0 0 20px rgba(0,180,255,.16);margin:0 auto}
+.cosmic-predict-btn:disabled{opacity:.3;cursor:not-allowed}
+.cosmic-predict-btn:not(:disabled):hover{transform:scale(1.04);box-shadow:0 0 44px rgba(0,200,255,.5);color:white;border-color:cyan}
+.cosmic-predict-btn::before{content:'';position:absolute;top:0;left:-150%;width:60%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-25deg)}
+.cosmic-predict-btn:not(:disabled):hover::before{animation:sweep .9s forwards}
+
+/* ============================================================
+   COSMIC ARENA
+============================================================ */
+.cosmic-arena{width:100%;position:relative}
+.warp-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;transition:opacity 1s ease}
+
+/* Magic circle scanning */
+.magic-circle-wrap{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  z-index:99999;
+  background:rgba(2,4,20,0.92);
+  backdrop-filter:blur(12px);
+}
+.mc-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:rgba(0,240,200,.7);animation:blink 1s infinite}
+
+/* ── TWO-COLUMN ARENA ── */
+.arena-columns{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:40px;
+  align-items:start;
+  padding:20px 30px 40px;
+  position:relative;
+  z-index:2;
+  transition:opacity .8s ease;
+  max-width:960px;
+  margin:0 auto;
+}
+
+@media(max-width:700px){
+  .arena-columns{grid-template-columns:1fr;padding:16px}
+  .arena-right{order:-1}
+}
+
+/* ── LEFT COLUMN ── */
+.arena-left{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  padding-top:30px;
+}
+
+.al-lived-row{
+  display:flex;
+  gap:32px;
+  justify-content:flex-start;
+}
+.al-stat{text-align:center}
+.al-stat-label{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:2px;color:rgba(180,150,255,.55);margin-bottom:4px}
+.al-stat-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;line-height:1}
+.al-stat-num.lived{color:#f59e0b;text-shadow:0 0 18px #f59e0b88}
+.al-stat-num.remain{color:#34d399;text-shadow:0 0 18px #34d39988}
+.al-stat-unit{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.35);margin-top:2px}
+
+/* Revelation */
+.al-revelation{
+  transition:opacity .8s ease, transform .8s ease;
+}
+.al-rev-number{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(72px,12vw,110px);
+  font-weight:900;line-height:1;
+  letter-spacing:-3px;
+  animation:revNumPulse 2.4s ease-in-out infinite alternate;
+}
+@keyframes revNumPulse{
+  from{text-shadow:0 0 20px cyan,0 0 50px purple}
+  to{text-shadow:0 0 40px #00ffee,0 0 100px cyan,0 0 160px rgba(150,0,255,.45)}
+}
+.al-rev-label{font-family:'Cinzel',serif;font-size:12px;letter-spacing:7px;color:rgba(200,170,255,.65);margin-top:6px}
+.al-rev-sub{font-family:'Cormorant Garamond',serif;font-size:19px;color:rgba(255,215,100,.88);margin-top:10px;font-style:italic;text-shadow:0 0 14px gold;line-height:1.4}
+
+/* Symbol */
+.al-symbol{text-align:left;transition:opacity 1.2s ease}
+.al-symbol .sym-emoji{font-size:52px;display:block;animation:symbolFloat 3s ease-in-out infinite}
+.al-symbol .sym-label{font-family: 'Playfair Display', serif;;font-size:16px;letter-spacing:2px;margin-top:8px;text-align: center;}
+@keyframes symbolFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Bonus/dark matter + stat bars */
+.arena-bonus{background:rgba(0,255,100,.07);border:1px solid rgba(0,255,100,.28);border-radius:13px;padding:14px 18px}
+.arena-bonus.dark{background:rgba(150,0,50,.1);border-color:rgba(255,50,50,.28)}
+.arena-bonus-title{font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;margin-bottom:7px}
+.arena-bonus-text{font-size:13px;color:rgba(220,220,220,.8);line-height:1.5}
+.arena-stats{display:flex;flex-direction:column;gap:10px}
+.arena-stat-row{display:flex;flex-direction:column;gap:5px}
+.arena-stat-label{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-size:15px;letter-spacing:1px;color:rgba(200,180,255,.7)}
+.arena-stat-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.arena-stat-fill{height:100%;border-radius:3px;transition:width 1.6s cubic-bezier(.4,0,.2,1);width:0}
+
+/* ── RIGHT COLUMN: THE HOURGLASS ── */
+.arena-right{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.hg-wrapper{
+  position:relative;
+  width:220px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  filter:drop-shadow(0 0 30px rgba(0,200,255,.2)) drop-shadow(0 0 60px rgba(120,0,220,.15));
+}
+
+/* Magic rings */
+.magic-ring{
+  width:220px;height:220px;
+  border-radius:50%;
+  position:relative;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.magic-ring::before,.magic-ring::after{
+  content:'';position:absolute;border-radius:50%;
+  animation:ringRotate 6s linear infinite;
+}
+.magic-ring::before{
+  inset:0;
+  border:2px solid transparent;
+  border-top-color:rgba(0,255,220,.7);
+  border-right-color:rgba(150,0,255,.5);
+  box-shadow:0 0 20px rgba(0,255,220,.3),inset 0 0 20px rgba(150,0,255,.15);
+}
+.magic-ring::after{
+  inset:10px;
+  border:1px solid transparent;
+  border-bottom-color:rgba(0,180,255,.5);
+  border-left-color:rgba(255,100,200,.4);
+  animation-direction:reverse;
+  animation-duration:4s;
+}
+.ring-top::before{animation-name:ringRotate}
+.ring-bottom::before{animation-name:ringRotate;animation-direction:reverse}
+.ring-bottom::after{animation-direction:normal;animation-duration:5s}
+
+@keyframes ringRotate{to{transform:rotate(360deg)}}
+
+/* Rune dots on ring */
+.magic-ring .rune{
+  position:absolute;
+  font-size:11px;
+  color:rgba(0,240,200,.6);
+  animation:runeGlow 3s ease-in-out infinite alternate;
+}
+@keyframes runeGlow{from{opacity:.3;text-shadow:none}to{opacity:.9;text-shadow:0 0 8px cyan}}
+
+/* Top & bottom bulbs */
+.hg-top,.hg-bottom{
+  width:200px;
+  overflow:hidden;
+  position:relative;
+  flex-shrink:0;
+}
+.hg-top{
+  height:140px;
+  clip-path:polygon(10% 0%,90% 0%,50% 100%);
+}
+.hg-bottom{
+  height:140px;
+  clip-path:polygon(50% 0%,10% 100%,90% 100%);
+}
+
+/* Glass effect inside bulbs */
+.hg-glass-top,.hg-glass-bottom{
+  position:absolute;inset:0;
+  backdrop-filter:blur(8px);
+  background:rgba(10,5,40,.55);
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+
+/* Sand */
+.sand-top{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(60,200,255,.7),rgba(120,230,255,.4),rgba(180,255,255,.15));
+  transition:height 8s cubic-bezier(.4,0,.6,1);
+  border-radius:0 0 2px 2px;
+}
+.sand-top::after{
+  content:'';position:absolute;top:-4px;left:0;right:0;height:8px;
+  background:radial-gradient(ellipse at 50% 100%,rgba(180,255,255,.6) 0%,transparent 70%);
+  animation:sandWave 2s ease-in-out infinite;
+}
+.sand-bottom{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(130,60,200,.75),rgba(200,120,80,.5),rgba(240,180,100,.2));
+  transition:height 8s cubic-bezier(.4,0,.6,1);
+}
+.sand-bottom::after{
+  content:'';position:absolute;top:-4px;left:0;right:0;height:8px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,200,120,.5) 0%,transparent 70%);
+  animation:sandWave 2.4s ease-in-out infinite reverse;
+}
+@keyframes sandWave{0%,100%{transform:scaleX(1) translateY(0)}50%{transform:scaleX(1.04) translateY(-2px)}}
+
+/* Neck / singularity */
+.hg-neck{
+  width:14px;height:28px;
+  position:relative;
+  overflow:visible;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.singularity{
+  width:12px;height:12px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(0,220,255,.7) 40%,transparent 70%);
+  box-shadow:0 0 14px rgba(0,220,255,.9),0 0 30px rgba(0,180,255,.6),0 0 60px rgba(100,0,255,.4);
+  animation:singularityPulse 1.4s ease-in-out infinite;
+  z-index:2;
+  position:relative;
+    display:none; 
+}
+@keyframes singularityPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 14px rgba(0,220,255,.9),0 0 30px rgba(0,180,255,.6)}
+  50%{transform:scale(1.35);box-shadow:0 0 22px rgba(0,255,220,1),0 0 50px rgba(0,200,255,.8),0 0 80px rgba(100,0,255,.5)}
+}
+
+/* Neck flow — dải sáng chạy liên tục */
+.neck-flow{
+  position:absolute;
+  top:-20px;left:50%;
+  transform:translateX(-50%);
+  width:3px;height:60px;
+  background:linear-gradient(to bottom,transparent,rgba(0,220,255,.8),transparent);
+  animation:neckFlowAnim 1.2s linear infinite;
+  border-radius:2px;
+  filter:blur(1px);
+}
+@keyframes neckFlowAnim{
+  0%{transform:translateX(-50%) translateY(-20px);opacity:0}
+  30%{opacity:1}
+  70%{opacity:1}
+  100%{transform:translateX(-50%) translateY(20px);opacity:0}
+}
+
+/* Stardust canvas overlay */
+.stardust-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:3;
+}
+
+/* Neck touch */
+.hg-neck-touch{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:80px;height:80px;
+  cursor:pointer;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:10;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.hg-neck-pulse{
+  position:absolute;
+  width:44px;height:44px;
+  border-radius:50%;
+  border:2px solid rgba(0,255,190,.5);
+  animation:neckPulse 1.8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes neckPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.7);opacity:0}}
+.hg-neck-hint{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;
+  color:rgba(0,255,190,.85);text-shadow:0 0 10px cyan;
+  margin-top:30px;white-space:nowrap;pointer-events:none;position:relative;z-index:1;
+}
+.hold-svg{
+  position:absolute;top:0;left:0;width:80px;height:80px;
+  pointer-events:none;overflow:visible;
+}
+#holdArc{transition:stroke-dashoffset .05s linear}
+.hg-neck-touch.holding .hg-neck-pulse{
+  border-color:rgba(0,255,140,.9);
+  animation:neckPulse .6s ease-in-out infinite;
+}
+
+/* Freeze animation — sand stops */
+.hg-wrapper.frozen .neck-flow{animation-play-state:paused;opacity:0;transition:opacity .5s}
+.hg-wrapper.frozen .singularity{animation:none;transform:scale(2);box-shadow:0 0 40px rgba(255,255,200,1),0 0 80px rgba(0,255,200,.8)}
+
+/* Scan sweep on reveal */
+@keyframes scanSweep{
+  0%{transform:translateY(-100%);opacity:0}
+  20%{opacity:1}
+  80%{opacity:1}
+  100%{transform:translateY(100%);opacity:0}
+}
+.scan-sweep{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent,rgba(0,220,255,.35),transparent);
+  animation:scanSweep .8s ease forwards;
+  pointer-events:none;z-index:5;
+}
+
+/* FIX MAGIC CIRCLE CENTER */
+#magicCircleWrap{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#magicCircleCanvas{
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+}
+
+/* ===== CENTER LIVED / REMAIN ROW ===== */
+
+.al-lived-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:100px;              /* khoảng cách giữa 2 cột */
+  width:100%;
+  margin-bottom:30px;
+}
+
+.al-stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.al-stat-label{
+  font-size:15px;
+  letter-spacing:2px;
+  opacity:0.7;
+}
+
+.al-stat-num{
+  font-size:42px;
+  font-weight:700;
+  margin:6px 0;
+}
+
+.al-stat-unit{
+  font-size:12px;
+  opacity:0.6;
+}
+
+/* ===== COSMIC GLASS UPGRADE ===== */
+
+.hg-glass-top,
+.hg-glass-bottom{
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.18), transparent 45%),
+    radial-gradient(circle at 70% 70%, rgba(0,255,255,0.08), transparent 60%),
+    linear-gradient(180deg, rgba(0,255,255,0.08), rgba(0,0,0,0.2));
+    
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0,255,255,0.2);
+  box-shadow:
+    inset 0 0 40px rgba(0,255,255,0.1),
+    0 0 35px rgba(0,255,255,0.15);
+}
+
+/* ===== AURA RING ===== */
+
+.hg-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  border-radius:50%;
+  background:
+    conic-gradient(
+      rgba(0,255,200,0.3),
+      transparent,
+      rgba(200,100,255,0.3),
+      transparent,
+      rgba(0,255,200,0.3)
+    );
+  filter: blur(40px);
+  animation: auraSpin 18s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+
+@keyframes auraSpin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* ===== SINGULARITY CORE ===== */
+
+.singularity{
+  background:
+    radial-gradient(circle, #00ffff, #0088ff 40%, transparent 70%);
+    
+  box-shadow:
+    0 0 25px cyan,
+    0 0 60px rgba(0,255,255,0.6);
+
+  animation: corePulse 2s ease-in-out infinite;
+}
+
+@keyframes corePulse{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.15); }
+  100%{ transform:scale(1); }
+}
+.magic-ring{
+  opacity:0.6;
+  filter: drop-shadow(0 0 12px rgba(0,255,255,0.5));
+}
+
+/* ===== RITUAL AURA ===== */
+
+.hg-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:-60px;
+  border-radius:50%;
+
+  background:
+    conic-gradient(
+      rgba(180,120,40,0.4),
+      rgba(80,0,120,0.4),
+      rgba(180,120,40,0.4)
+    );
+
+  filter: blur(60px);
+  opacity:0.6;
+  animation: ritualSpin 30s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes ritualSpin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* ===== ANCIENT TOME GLASS ===== */
+
+.hg-glass-top,
+.hg-glass-bottom{
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,240,200,0.15), transparent 50%),
+    linear-gradient(180deg, rgba(80,40,10,0.6), rgba(20,10,5,0.8));
+
+  border: 1px solid rgba(180,120,40,0.35);
+
+  box-shadow:
+    inset 0 0 50px rgba(255,180,80,0.1),
+    0 0 40px rgba(120,60,20,0.3);
+
+  backdrop-filter: blur(3px);
+}
+
+/* ===== MYSTIC SAND ===== */
+
+.sand-top,
+.sand-bottom{
+  background:
+    radial-gradient(circle at 50% 30%, #fff6c2, transparent 60%),
+    linear-gradient(180deg, #ffd700, #b8860b);
+
+  box-shadow:
+    0 0 25px rgba(255,215,0,0.6),
+    0 0 60px rgba(255,170,0,0.3);
+}
+
+/* ===== ARCANE CORE ===== */
+
+.singularity{
+  background:
+    radial-gradient(circle, #ffd700, #8b4513 60%, transparent 80%);
+
+  box-shadow:
+    0 0 30px rgba(255,200,80,0.8),
+    0 0 80px rgba(150,60,10,0.6);
+
+  animation: arcanePulse 3s ease-in-out infinite;
+}
+
+@keyframes arcanePulse{
+  0%{ transform:scale(1); opacity:0.9; }
+  50%{ transform:scale(1.2); opacity:1; }
+  100%{ transform:scale(1); opacity:0.9; }
+}
+
+/* ===== ANCIENT RUNES ===== */
+
+.magic-ring .rune{
+  color:#ffd700;
+  text-shadow:
+    0 0 10px rgba(255,215,0,0.8),
+    0 0 20px rgba(255,140,0,0.6);
+}
+
+.magic-ring{
+  filter: drop-shadow(0 0 15px rgba(255,180,60,0.4));
+  opacity:0.75;
+}
+
+/* ===== TEMPLE MIST ===== */
+
+.hg-wrapper::after{
+  content:"";
+  position:absolute;
+  inset:-100px;
+  background:
+    radial-gradient(circle at center,
+      rgba(120,60,20,0.4),
+      transparent 70%);
+  filter: blur(80px);
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* =========================================
+   MYSTIC ANCIENT HOURGLASS (REMASTERED)
+========================================= */
+
+.hg-wrapper{
+  position:relative;
+  width:260px;
+  height:520px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  filter:drop-shadow(0 0 60px rgba(255,180,80,0.25));
+}
+
+.hg-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:-120px;
+  background:radial-gradient(circle,
+      rgba(255,200,120,0.25) 0%,
+      rgba(120,60,0,0.15) 40%,
+      transparent 70%);
+  filter:blur(60px);
+  z-index:-1;
+}
+
+.magic-ring{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  position:absolute;
+  border:2px solid rgba(255,200,120,0.4);
+  box-shadow:
+    0 0 25px rgba(255,200,120,0.5),
+    inset 0 0 40px rgba(255,180,80,0.3);
+  animation:ancientRotate 40s linear infinite;
+}
+
+.ring-top{ top:-30px; }
+.ring-bottom{ bottom:-30px; }
+
+@keyframes ancientRotate{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+.hg-top, .hg-bottom{
+  width:0;
+  height:0;
+  border-left:100px solid transparent;
+  border-right:100px solid transparent;
+}
+
+.hg-top{
+  border-bottom:180px solid rgba(255,215,150,0.15);
+  filter:drop-shadow(0 0 20px rgba(255,180,80,0.3));
+}
+
+.hg-bottom{
+  border-top:180px solid rgba(255,180,80,0.2);
+  filter:drop-shadow(0 0 25px rgba(255,150,60,0.4));
+}
+
+.hg-neck{
+  width:10px;
+  height:60px;
+  background:linear-gradient(to bottom,
+      rgba(255,200,120,0.8),
+      rgba(255,120,40,0.8));
+  border-radius:6px;
+  box-shadow:0 0 15px rgba(255,150,60,0.8);
+  position:relative;
+  z-index:2;
+}
+
+.sand-top,
+.sand-bottom{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:60px;
+  background:radial-gradient(circle,
+      rgba(255,230,180,0.9) 0%,
+      rgba(255,180,80,0.7) 60%,
+      transparent 100%);
+  filter:blur(15px);
+}
+
+.sand-top{ top:40px; }
+.sand-bottom{ bottom:40px; }
+
+.singularity{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,
+      rgba(255,255,200,1),
+      rgba(255,180,60,0.8),
+      rgba(255,100,0,0.6));
+  box-shadow:
+      0 0 20px rgba(255,200,120,1),
+      0 0 40px rgba(255,120,40,0.8);
+  animation:pulseCore 2s ease-in-out infinite;
+}
+
+@keyframes pulseCore{
+  0%,100%{ transform:translate(-50%,-50%) scale(1); }
+  50%{ transform:translate(-50%,-50%) scale(1.2); }
+}
+
+
+
+/* =========================================
+   ARCANE STAT ANIMATION UPGRADE
+========================================= */
+
+/* Label glow animation */
+.stat-label{
+  position:relative;
+  display:inline-block;
+  animation: arcaneGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes arcaneGlow{
+  from{
+    text-shadow: 0 0 5px rgba(120,200,255,0.4);
+  }
+  to{
+    text-shadow: 0 0 18px rgba(120,200,255,0.9),
+                 0 0 30px rgba(180,120,255,0.6);
+  }
+}
+
+/* Percentage shimmer effect */
+.stat-value{
+  position:relative;
+  animation: valuePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes valuePulse{
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.08);
+  }
+}
+
+/* Shimmer sweep */
+.stat-label::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,
+      transparent,
+      rgba(255,255,255,0.6),
+      transparent);
+  animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer{
+  0%{ left:-100%; }
+  100%{ left:100%; }
+}
+
+/* =====================================
+   ARCANE EFFECT FOR STAT TITLES
+===================================== */
+
+/* chữ: Tình duyên / Tiền bạc / Sức khỏe */
+.al-bar-label{
+  position:relative;
+  display:inline-block;
+  font-weight:600;
+  letter-spacing:1px;
+  transition:all 0.3s ease;
+  animation: arcaneTextGlow 3s ease-in-out infinite alternate;
+}
+
+/* glow nhấp nháy */
+@keyframes arcaneTextGlow{
+  from{
+    text-shadow:0 0 5px rgba(0,255,200,0.4);
+  }
+  to{
+    text-shadow:
+      0 0 12px rgba(0,255,200,0.9),
+      0 0 25px rgba(0,150,255,0.6);
+  }
+}
+
+
+@keyframes arcaneShimmer{
+  0%{ left:-100%; }
+  100%{ left:100%; }
+}
+
+/* =====================================
+   Mystic Soft Flicker for Stat Titles
+===================================== */
+
+/* chữ Tình duyên / Tiền bạc / Sức khỏe */
+#arenaResultExtra > div > div:first-child{
+  position:relative;
+  font-weight:600;
+  letter-spacing:1px;
+  animation: mysticFlicker 3s infinite ease-in-out;
+}
+
+/* hiệu ứng nhấp nháy nhẹ */
+@keyframes mysticFlicker{
+  0%{
+    opacity:0.85;
+    text-shadow:0 0 4px rgba(0,255,200,0.3);
+  }
+  50%{
+    opacity:1;
+    text-shadow:
+      0 0 10px rgba(0,255,200,0.8),
+      0 0 20px rgba(0,150,255,0.5);
+  }
+  100%{
+    opacity:0.9;
+    text-shadow:0 0 6px rgba(0,255,200,0.4);
+  }
+
+}
+
+/* ===============================
+   Make "ĐÃ SỐNG" & "CÒN LẠI" nổi bật hơn
+================================ */
+
+/* tiêu đề nhỏ phía trên số */
+.al-stat-label{
+  color: #b8f9ff;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 1;
+
+  text-shadow:
+    0 0 6px rgba(0,255,255,0.6),
+    0 0 14px rgba(0,150,255,0.4);
+
+  animation: statGlow 3s ease-in-out infinite;
+}
+
+/* số 24 và 36 nổi hơn nữa */
+.al-stat-label{
+  font-weight: 700;
+  text-shadow:
+    0 0 10px rgba(255,180,0,0.7),
+    0 0 25px rgba(0,255,200,0.5);
+}
+
+/* animation glow nhẹ */
+@keyframes statGlow{
+  0%{
+    text-shadow:
+      0 0 4px rgba(0,255,255,0.4);
+  }
+  50%{
+    text-shadow:
+      0 0 12px rgba(0,255,255,0.9),
+      0 0 20px rgba(0,150,255,0.5);
+  }
+  100%{
+    text-shadow:
+      0 0 6px rgba(0,255,255,0.5);
+  }
+}
+
+@keyframes mysticSubGlow{
+  0%{
+    opacity:0.8;
+    text-shadow:
+      0 0 4px rgba(180,150,255,0.3);
+  }
+  50%{
+    opacity:1;
+    text-shadow:
+      0 0 12px rgba(200,160,255,0.9),
+      0 0 22px rgba(120,80,255,0.6);
+  }
+  100%{
+    opacity:0.85;
+    text-shadow:
+      0 0 6px rgba(180,150,255,0.4);
+  }
+}
